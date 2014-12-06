@@ -24,15 +24,21 @@ a:hover {
  * Base structure
  */
 
-html,
 body {
   height: 100%;
   background-color: #F47F00;
-}
-body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  display: inline-block !important;
+}
+
+.dropdown {
+  display: inline-block !important;
+}
+
+.lead {
+  font-size: 100px;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -162,10 +168,7 @@ body {
   }
 }
 
-.fillout{
+.fillout div{
   display:inline;
 }
 
-.dropdown-menu{
-  display: inline;
-}
