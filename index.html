@@ -24,6 +24,8 @@
 
         <link rel="stylesheet" href="css/main.css">
 
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
         <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
@@ -39,6 +41,7 @@
       <div class="site-wrapper">
           <div class="site-wrapper-inner">
             <div class="cover-container">
+              
               <div class="masthead clearfix">
                 <div class="inner">
                   <h3 class="masthead-brand"></h3>
@@ -47,7 +50,7 @@
                 </div>
               </div>
 
-              <div class="inner cover">
+              <div class="inner cover pref1">
                 <h1 class="cover-heading">Inmate Soulmate</h1>
 
                 <p class="lead">Find your Inmate Soulmate today!</p>
@@ -82,13 +85,61 @@
                       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other</a></li>
                     </ul>
                   </div>
-                    <a href="#" class="btn btn-lg btn-default">Continue</a>
+                    <button class="btn btn-lg btn-default continue">Continue</button>
                   </p>
-
                 </div>
-                
-              
               </div>
+
+              <div class="inner cover pref2">
+                <h1 class="cover-heading">Please fill out more preferences.</h1>
+
+                <div class="fillout">                  
+                  <form class="form-horizontal" role="form" style="display: inline-block;">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label class="col-sm-4 control-label lead">Age Range</label>
+
+                        <div class="col-sm-8">
+                          <input class="form-control" id="agefloor" placeholder="" style="display: inline-block; float:none; width:40%;">
+                          to
+                          <input class="form-control" id="ageceiling" placeholder="" style="display: inline-block; float:none; width:40%;">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                  </br>
+                  <p class="lead" style="display: inline-block;">Hobbies</p>
+                  <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      MURDER
+                      <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Straight</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Gay</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bisexual</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other</a></li>
+                    </ul>
+                  </div>
+                  </br>
+
+                  <p class="lead" style="display: inline-block;">Race</p>
+                  <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      BLACK
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Man</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Woman</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
 
               <div class="mastfoot">
                 <div class="inner">
@@ -105,26 +156,22 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <!-- <script src="../../assets/js/docs.min.js"></script> -->
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
-        <!-- 
-        <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" title="" data-original-title="Copy to clipboard">
-            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1416468146628">         
-            <param name="allowScriptAccess" value="sameDomain">         
-            <param name="scale" value="exactfit">         
-            <param name="loop" value="false">         
-            <param name="menu" value="false">         
-            <param name="quality" value="best">         
-            <param name="bgcolor" value="#ffffff">         
-            <param name="wmode" value="transparent">         
-            <param name="flashvars" value="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com">         
-            <embed src="/assets/flash/ZeroClipboard.swf?noCache=1416468146628" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com" scale="exactfit">                
-            </object>
-        </div>
-        -->
-        <!-- Latest compiled and minified JavaScript -->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+        <script>
+          
+          $('.pref2').hide();
+
+          //Continue button hides pref1 and shows pref2
+          $('.continue').click(function(){
+            $('.pref1').hide();
+            $('.pref2').show();
+          });
+
+          
+
+
+        </script>
+
+        
     </body>
 <html>
