@@ -1,0 +1,15 @@
+body{
+    font-family: lato;
+}
+
+#header{
+    font-size: 32px;
+}
+
+.row{
+
+}
+
+.darkBG{
+	background: #999;
+}
