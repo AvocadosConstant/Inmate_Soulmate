@@ -3,16 +3,16 @@ var assert = require("assert");
 var MongoClient = require('mongodb').MongoClient;
 var jf = require('jsonfile');
 var searchUrl = "http://www.dcor.state.ga.us:80/GDC/OffenderQuery/jsp/OffQryForm.jsp"
-/*
+
 function addPrisoner(html) {
-    return false;  
+
+    MongoClient.connect("mongodb://localhost:27017/prisoners", function(err, db) {
+	if(!err) {
+	    console.log("We are connected");
+	}
+    });
+    
 }
-*/
-MongoClient.connect("mongodb://localhost:27017/prisoners", function(err, db) {
-    if(!err) {
-	console.log("We are connected");
-    }
-});
 
 browser = new Browser()
 browser.visit(searchUrl, function() {
@@ -31,4 +31,4 @@ browser.visit(searchUrl, function() {
 	    }
 	});
     });
-}
+});
