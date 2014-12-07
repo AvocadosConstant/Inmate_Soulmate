@@ -34,12 +34,45 @@ body {
   font-family: lato;
 }
 
+.card{
+	background:#EEE;
+	border-radius: 10px;
+	width: 70%;
+	height:400px;
+	display:inline-block;
+  vertical-align: middle;
+  color:#111;
+}
+
+.choice{
+	display:inline-block;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	background: black;
+  color: white;
+  vertical-align: middle;
+  font-size: 40px;
+  padding-top: 5px;
+}
+
+.no{
+  margin-right:10px;
+}
+
+.yes{
+  margin-left:10px;
+}
+
 .dropdown{
 	display:inline-block;
 	margin:5px;
 	padding:5px;
 }
 
+.input-group{
+	display: inline-block;
+}
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
