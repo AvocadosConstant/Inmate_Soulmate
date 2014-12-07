@@ -6,29 +6,29 @@ var searchUrl = "http://www.dcor.state.ga.us:80/GDC/OffenderQuery/jsp/OffQryForm
 
 function addPrisoner(html) {
 
-    MongoClient.connect("mongodb://localhost:27017/prisoners", function(err, db) {
-	if(!err) {
-	    console.log("We are connected");
-	}
-    });
-    
+	MongoClient.connect("mongodb://localhost:27017/prisoners", function(err, db) {
+		if(!err) {
+			console.log("We are connected");
+		}
+	});
+	
 }
 
 browser = new Browser()
 browser.visit(searchUrl, function() {
     //console.log(browser.html());
     browser.pressButton("submit2", function() {
-	assert.ok(browser.success);
-	jf.readFile('prisonlist.json', function(err, obj) {
-	    for(var p in obj) {
-		browser.visit(searchUrl, function() {
-		    browser.select("vCurrentInstitution", obj[p], function() {
-			browser.pressButton("NextButton", function() {
-			    addPrisoner(browser.html());
-			});
-		    });
-		});
-	    }
-	});
+    	assert.ok(browser.success);
+    	jf.readFile('prisonlist.json', function(err, obj) {
+    		for(var p in obj) {
+    			browser.visit(searchUrl, function() {
+    				browser.select("vCurrentInstitution", obj[p], function() {
+    					browser.pressButton("NextButton", function() {
+    						addPrisoner(browser.html());
+    					});
+    				});
+    			});
+    		}
+    	});
     });
 });
