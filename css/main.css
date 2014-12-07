@@ -38,10 +38,14 @@ body {
 	background:#EEE;
 	border-radius: 10px;
 	width: 70%;
-	height:400px;
 	display:inline-block;
   vertical-align: middle;
   color:#111;
+  padding:20px;
+}
+
+.card-container{
+  
 }
 
 .choice{
