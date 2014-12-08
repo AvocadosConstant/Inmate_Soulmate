@@ -11,7 +11,7 @@ function addPrisoner(html) {
 	    console.log("We are connected");
 	}
     });
-    
+    console.log(html);
 }
 
 browser = new Browser()
@@ -21,6 +21,7 @@ browser.visit(searchUrl, function() {
 	assert.ok(browser.success);
 	jf.readFile('prisonlist.json', function(err, obj) {
 	    for(var p in obj) {
+		console.log("Iteration!");
 		browser.visit(searchUrl, function() {
 		    browser.select("vCurrentInstitution", obj[p], function() {
 			browser.pressButton("NextButton", function() {
