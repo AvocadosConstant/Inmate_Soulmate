@@ -19,24 +19,30 @@ def main():
 def listPrison(location):
     global b
     global pool
-    b.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
-    radioBtn = b.find_element_by_id("byOther")
-    locField = Select(b.find_element_by_id("vCurrentInstitution"))
+    try:
+        b.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
+        radioBtn = b.find_element_by_id("byOther")
+        locField = Select(b.find_element_by_id("vCurrentInstitution"))
     #maxField = Select(b.find_element_by_id("RecordsPerPage"))
-    form = b.find_element_by_id("OffenderQueryForm")
-    ActionChains(b).click(radioBtn).perform()
-    locField.select_by_value(location)
+        form = b.find_element_by_id("OffenderQueryForm")
+        ActionChains(b).click(radioBtn).perform()
+        locField.select_by_value(location)
     #maxField.select_by_value("150")
     #b.execute_script("document.getElementById('RecordsPerPage').value = '150'")
-    form.submit()
-    ids = b.find_elements_by_name("vRecNo")
-    for gcdid in ids:
-        pullPrisoner(gcdid.get_attribute('value'))
+        form.submit()
+        ids = b.find_elements_by_name("vRecNo")
+        for gcdid in ids:
+            pullPrisoner(gcdid.get_attribute('value'))
     #print(b.page_source)
+    except:
+        print("Prison Failure")
 
 def pullPrisoner(prisonerID):
     global b2
     global db
+    if(db.prisoners.find({'_id' : prisonerID}).count() > 0):
+        print("skipping " + prisonerID)
+        return 0;
     print(prisonerID)
     try:
         b2.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
@@ -55,8 +61,8 @@ def pullPrisoner(prisonerID):
         birthyear = re.search('YOB:\n(.*?)\n', info).group(1)
         weight = re.search('WEIGHT:\n(.*?)\n', info).group(1)
         majoff = re.search('MAJOR OFFENSE:\n(.*?)\n', b2.find_element_by_xpath('//*[@id="general-content"]/p[4]').text).group(1)
-        print(name)
-        pris = {"_gdcid" : prisonerID,
+        #print(name)
+        pris = {"_id" : prisonerID,
                 "name" : name,
                 "gender" : gender,
                 "race" : race,
@@ -65,7 +71,7 @@ def pullPrisoner(prisonerID):
                 "weight" : weight,
                 "majoff" : majoff
                 }
-        pprint(pris)
+        #pprint(pris)
         db.prisoners.insert(pris)
     except:
         print("Failed to add prisoner")
