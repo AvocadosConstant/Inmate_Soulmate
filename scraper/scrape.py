@@ -38,42 +38,43 @@ def pullPrisoner(prisonerID):
     global b2
     global db
     print(prisonerID)
-    b2.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
-    form = b2.find_element_by_id("OffenderQueryForm")
-    identifier = Select(b2.find_element_by_id("vUnoCaseNoRadioButton"))
-    identifier.select_by_value("UNO_NO")
-    textBox = b2.find_element_by_id("vOffenderId")
-    textBox.send_keys(prisonerID)
-    form = b2.find_element_by_id("OffenderQueryForm")
-    form.submit()
-    name = b2.find_element_by_xpath('//*[@id="general-content"]/h4').text
-    info = b2.find_element_by_xpath('//*[@id="general-content"]/p[2]').text
-    gender = re.search('GENDER:\n(.*?)\n',info).group(1)
-    race = re.search('RACE:\n(.*?)\n',info).group(1)
-    height = re.search('HEIGHT:\n(.*?)\n',info).group(1)
-    birthyear = re.search('YOB:\n(.*?)\n',info).group(1)
-    weight = re.search('WEIGHT:\n(.*?)\n',info).group(1)
-    majoff = re.search('MAJOR OFFENSE:\n(.*?)\n', b2.find_element_by_xpath('//*[@id="general-content"]/p[4]').text).group(1)
-    print(name)
-    pris = {"_gdcid" : prisonerID,
-            "name" : name,
-            "gender" : gender,
-            "race" : race,
-            "height" : height,
-            "birthyear" : birthyear,
-            "weight" : weight,
-            "majoff" : majoff
-            }
-    pprint(pris)
-    db.prisoners.insert(pris)
+    try:
+        b2.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
+        form = b2.find_element_by_id("OffenderQueryForm")
+        identifier = Select(b2.find_element_by_id("vUnoCaseNoRadioButton"))
+        identifier.select_by_value("UNO_NO")
+        textBox = b2.find_element_by_id("vOffenderId")
+        textBox.send_keys(prisonerID)
+        form = b2.find_element_by_id("OffenderQueryForm")
+        form.submit()
+        name = b2.find_element_by_xpath('//*[@id="general-content"]/h4').text
+        info = b2.find_element_by_xpath('//*[@id="general-content"]/p[2]').text
+        gender = re.search('GENDER:\n(.*?)\n', info).group(1)
+        race = re.search('RACE:\n(.*?)\n',info).group(1)
+        height = re.search('HEIGHT:\n(.*?)\n', info).group(1)
+        birthyear = re.search('YOB:\n(.*?)\n', info).group(1)
+        weight = re.search('WEIGHT:\n(.*?)\n', info).group(1)
+        majoff = re.search('MAJOR OFFENSE:\n(.*?)\n', b2.find_element_by_xpath('//*[@id="general-content"]/p[4]').text).group(1)
+        print(name)
+        pris = {"_gdcid" : prisonerID,
+                "name" : name,
+                "gender" : gender,
+                "race" : race,
+                "height" : height,
+                "birthyear" : birthyear,
+                "weight" : weight,
+                "majoff" : majoff
+                }
+        pprint(pris)
+        db.prisoners.insert(pris)
+    except:
+        print("Failed to add prisoner")
 
 
 def initializeBrowsers():
     global b
     global b2
-    bs = []
-    bs.append(b)
-    bs.append(b2)
+    bs = [b, b2]
     for br in bs:
         br.delete_all_cookies()
         br.get("http://www.dcor.state.ga.us/GDC/OffenderQuery/jsp/OffQryForm.jsp")
