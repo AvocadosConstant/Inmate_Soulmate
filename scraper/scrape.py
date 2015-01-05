@@ -29,6 +29,8 @@ def listPrison(location):
         locField.select_by_value(location)
     #maxField.select_by_value("150")
     #b.execute_script("document.getElementById('RecordsPerPage').value = '150'")
+        maxRec = b.find_element_by_xpath('//*[@id="RecordsPerPage"]/option[5]')
+        b.execute_script("arguments[0].setAttribute('value', '150')", maxRec)
         form.submit()
         ids = b.find_elements_by_name("vRecNo")
         for gcdid in ids:
